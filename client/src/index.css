@@ -1,0 +1,351 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Design Tokens ─────────────────────────────────────────────── */
+:root {
+  --ca-black:    #060d08;
+  --ca-surface:  #0d1a10;
+  --ca-deep:     #0a1209;
+  --ca-green:    #2d6a4f;
+  --ca-accent:   #3d9e6e;
+  --ca-heather:  #7c5c8a;
+  --ca-text:     #e8f0ea;
+  --ca-muted:    #8aab92;
+  --ca-frost:    #b8d4be;
+  --ca-border:   #1a2e1e;
+}
+
+/* ─── Base ───────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--ca-black);
+  color: var(--ca-text);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ca-black);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--ca-green);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ca-accent);
+}
+
+/* ─── Noise Texture Overlay ──────────────────────────────────────── */
+.noise-overlay {
+  position: relative;
+}
+.noise-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+}
+.noise-overlay > *:not(.absolute) {
+  position: relative;
+  z-index: 2;
+}
+
+/* ─── Frosted Glass (dark) ───────────────────────────────────────── */
+.glass-panel {
+  background: rgba(13, 26, 16, 0.7);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid rgba(61, 158, 110, 0.12);
+}
+
+
+/* ─── Animation Utilities ────────────────────────────────────────── */
+.animate-delay-100 { animation-delay: 100ms; }
+.animate-delay-200 { animation-delay: 200ms; }
+.animate-delay-300 { animation-delay: 300ms; }
+.animate-delay-400 { animation-delay: 400ms; }
+.animate-delay-500 { animation-delay: 500ms; }
+.animate-delay-600 { animation-delay: 600ms; }
+.animate-delay-700 { animation-delay: 700ms; }
+.animate-delay-800 { animation-delay: 800ms; }
+
+.opacity-0-start {
+  opacity: 0;
+}
+
+/* ─── Keyframes ──────────────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes shimmer {
+  from { background-position: -200% center; }
+  to   { background-position: 200% center; }
+}
+
+@keyframes pulseSlow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50%       { opacity: 0.7; transform: scale(1.08); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 0.9; }
+}
+
+@keyframes dotBounce {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40%           { transform: scale(1); opacity: 1; }
+}
+
+@keyframes snowDrift {
+  0%   { transform: translateY(-10px) translateX(0px); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateY(110vh) translateX(40px); opacity: 0; }
+}
+
+@keyframes topoScroll {
+  from { background-position: 0 0; }
+  to   { background-position: 100px 100px; }
+}
+
+/* ─── Topo Pattern ───────────────────────────────────────────────── */
+.topo-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cpath d='M0 200 Q50 180 100 200 Q150 220 200 200 Q250 180 300 200 Q350 220 400 200' fill='none' stroke='%233d9e6e' stroke-width='0.6' opacity='0.3'/%3E%3Cpath d='M0 220 Q60 195 120 220 Q180 245 240 220 Q300 195 360 220 Q380 228 400 220' fill='none' stroke='%233d9e6e' stroke-width='0.5' opacity='0.2'/%3E%3Cpath d='M0 180 Q40 160 80 180 Q120 200 160 180 Q200 160 240 180 Q280 200 320 180 Q360 160 400 180' fill='none' stroke='%232d6a4f' stroke-width='0.4' opacity='0.15'/%3E%3Cpath d='M0 240 Q70 210 140 240 Q210 270 280 240 Q340 215 400 240' fill='none' stroke='%233d9e6e' stroke-width='0.5' opacity='0.18'/%3E%3Cpath d='M0 160 Q50 140 100 160 Q150 180 200 160 Q250 140 300 160 Q350 180 400 160' fill='none' stroke='%232d6a4f' stroke-width='0.4' opacity='0.12'/%3E%3Cpath d='M0 260 Q80 230 160 260 Q240 290 320 260 Q360 245 400 260' fill='none' stroke='%233d9e6e' stroke-width='0.4' opacity='0.15'/%3E%3Cpath d='M0 140 Q45 120 90 140 Q135 160 180 140 Q225 120 270 140 Q315 160 360 140 Q380 133 400 140' fill='none' stroke='%233d9e6e' stroke-width='0.3' opacity='0.1'/%3E%3Cpath d='M0 280 Q90 250 180 280 Q270 310 360 280 Q380 273 400 280' fill='none' stroke='%233d9e6e' stroke-width='0.3' opacity='0.1'/%3E%3C/svg%3E");
+  background-size: 400px 400px;
+  animation: topoScroll 60s linear infinite;
+}
+
+/* ─── Gradient Glow ──────────────────────────────────────────────── */
+.hero-glow {
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(61, 158, 110, 0.18) 0%, rgba(45, 106, 79, 0.08) 50%, transparent 80%);
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+/* ─── Text Gradient ──────────────────────────────────────────────── */
+.text-gradient-mint {
+  background: linear-gradient(135deg, var(--ca-accent) 0%, var(--ca-frost) 50%, var(--ca-accent) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+/* ─── Section Fade ───────────────────────────────────────────────── */
+.hero-bottom-fade {
+  background: linear-gradient(to bottom, transparent 60%, var(--ca-black) 100%);
+}
+
+/* ─── Mint Underline ─────────────────────────────────────────────── */
+.mint-underline {
+  position: relative;
+  display: inline-block;
+}
+.mint-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--ca-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.mint-underline:hover::after {
+  transform: scaleX(1);
+}
+
+/* ─── Button Styles ──────────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: var(--ca-accent);
+  color: var(--ca-black);
+  font-family: 'Unbounded', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.15);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+.btn-primary:hover::before {
+  transform: translateX(0);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(61, 158, 110, 0.4);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: transparent;
+  color: var(--ca-frost);
+  font-family: 'Unbounded', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid rgba(184, 212, 190, 0.3);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.btn-ghost:hover {
+  border-color: var(--ca-accent);
+  color: var(--ca-accent);
+  transform: translateY(-2px);
+}
+
+/* ─── Chat input focus ring ──────────────────────────────────────── */
+.chat-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(61, 158, 110, 0.4);
+}
+
+/* ─── Markdown content trim ──────────────────────────────────────── */
+.markdown-content > *:first-child {
+  margin-top: 0;
+}
+.markdown-content > *:last-child {
+  margin-bottom: 0;
+}
+
+/* ─── Liquid Glass Chip ──────────────────────────────────────────── */
+.liquid-chip {
+  position: relative;
+  overflow: hidden;
+  background: rgba(13, 26, 16, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(61, 158, 110, 0.18);
+  transition: border-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.liquid-chip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle 55px at var(--gx, 50%) var(--gy, 50%),
+    rgba(61, 158, 110, 0.18) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.liquid-chip::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(61, 158, 110, 0.06) 0%,
+    transparent 50%,
+    rgba(61, 158, 110, 0.03) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.liquid-chip:hover {
+  border-color: rgba(61, 158, 110, 0.4);
+  color: var(--ca-accent) !important;
+  box-shadow: 0 0 0 1px rgba(61, 158, 110, 0.08), 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.liquid-chip:hover::before,
+.liquid-chip:hover::after {
+  opacity: 1;
+}
+
+.liquid-chip:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.liquid-chip span {
+  position: relative;
+  z-index: 1;
+}
+
+.liquid-chip svg {
+  position: relative;
+  z-index: 1;
+}
+
+.liquid-chip:focus-visible {
+  border-color: rgba(61, 158, 110, 0.6);
+  outline: none;
+}
+
+/* Lenis smooth scroll */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
