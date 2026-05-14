@@ -163,7 +163,7 @@ export default function AvieBikesDemo() {
               {/* Messages */}
               <div
                 className="flex-1 overflow-y-auto px-6 py-4 space-y-4 flex flex-col"
-                style={{ color: 'var(--ca-frost)' }}
+                style={{ color: 'var(--ca-frost)', overflowY: 'auto', WebkitOverflowScrolling: 'touch', touchAction: 'pan-y' }}
               >
                 {messages.map((msg, idx) => (
                   <div
