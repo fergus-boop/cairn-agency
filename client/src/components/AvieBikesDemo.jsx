@@ -131,7 +131,7 @@ export default function AvieBikesDemo() {
         <ScrollReveal delay={0.2} direction="up" blur>
           <div className="mx-auto" style={{ maxWidth: '900px' }}>
             <div
-              className="flex flex-col rounded-xl border overflow-hidden"
+              className="flex flex-col rounded-xl border"
               style={{
                 background: 'rgba(6, 13, 8, 0.4)',
                 borderColor: 'rgba(61, 158, 110, 0.2)',
@@ -162,8 +162,8 @@ export default function AvieBikesDemo() {
 
               {/* Messages */}
               <div
-                className="flex-1 overflow-y-auto px-6 py-4 space-y-4 flex flex-col"
-                style={{ color: 'var(--ca-frost)', overflowY: 'auto', WebkitOverflowScrolling: 'touch', touchAction: 'pan-y' }}
+                className="flex-1 px-6 py-4 space-y-4 flex flex-col"
+                style={{ color: 'var(--ca-frost)', overflowY: 'scroll', WebkitOverflowScrolling: 'touch', touchAction: 'pan-y' }}
               >
                 {messages.map((msg, idx) => (
                   <div
