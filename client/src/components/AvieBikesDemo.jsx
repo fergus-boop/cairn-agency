@@ -3,6 +3,8 @@ import { Send } from 'lucide-react';
 import ScrollReveal from './ui/ScrollReveal.jsx';
 import BackgroundPaths from './BackgroundPaths.jsx';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3003';
+
 const SYSTEM_PROMPT = `You are the smart booking assistant for Aviemore Bikes, a bike hire shop in Aviemore village in the Cairngorms National Park, Scotland. You help customers book bikes by collecting all the information the shop needs in one smooth conversation.
 
 Bike types and pricing:
@@ -52,23 +54,17 @@ export default function AvieBikesDemo() {
     setLoading(true);
 
     try {
-      const response = await fetch('/api/chat', {
+      const response = await fetch(`${API_URL}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          messages: updatedMessages.map((msg) => ({
-            role: msg.role,
-            content: msg.content,
-          })),
-          system: SYSTEM_PROMPT,
-        }),
+        body: JSON.stringify({ message: userMessage, businessContext: 'aviemore-bikes' }),
       });
 
       if (response.ok) {
         const data = await response.json();
         setMessages([
           ...updatedMessages,
-          { role: 'assistant', content: data.message },
+          { role: 'assistant', content: data.reply },
         ]);
       }
     } catch (error) {
@@ -179,7 +175,7 @@ export default function AvieBikesDemo() {
                       style={{
                         maxWidth: msg.role === 'user' ? '60%' : '75%',
                         minHeight: '1.5em',
-                        fontSize: '15px',
+                        fontSize: '17px',
                         background:
                           msg.role === 'user'
                             ? 'rgba(61, 158, 110, 0.2)'
@@ -222,7 +218,7 @@ export default function AvieBikesDemo() {
                   onKeyPress={(e) => e.key === 'Enter' && handleSend()}
                   placeholder="Type your response..."
                   disabled={loading}
-                  className="flex-1 bg-transparent text-sm outline-none"
+                  className="flex-1 bg-transparent outline-none"
                   style={{
                     color: 'var(--ca-frost)',
                   }}

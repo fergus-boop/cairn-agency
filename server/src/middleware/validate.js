@@ -1,7 +1,7 @@
 import { body, validationResult } from 'express-validator'
 import { sanitizeInput } from '../utils/sanitize.js'
 
-const VALID_BUSINESS_CONTEXTS = ['freeski', 'treezone-aviemore', 'combined']
+const VALID_BUSINESS_CONTEXTS = ['freeski', 'treezone-aviemore', 'combined', 'aviemore-bikes']
 
 /**
  * Validation rules for the chat endpoint.
