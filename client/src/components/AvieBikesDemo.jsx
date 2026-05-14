@@ -57,7 +57,7 @@ export default function AvieBikesDemo() {
       const response = await fetch(`${API_URL}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userMessage, businessContext: 'aviemore-bikes' }),
+        body: JSON.stringify({ message: userMessage, messages: updatedMessages, businessContext: 'aviemore-bikes' }),
       });
 
       if (response.ok) {

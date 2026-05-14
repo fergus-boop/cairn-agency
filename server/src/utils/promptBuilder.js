@@ -158,13 +158,26 @@ function getSystemPrompt(businessContext) {
  * trusted system instructions from untrusted user-supplied content,
  * mitigating prompt injection attempts.
  *
- * @param {string} sanitizedUserInput - Pre-sanitized user message
+ * @param {string} sanitizedUserInput - Pre-sanitized latest user message
  * @param {string} [businessContext='combined'] - Validated business context from middleware
+ * @param {Array} [sanitizedHistory=[]] - Pre-sanitized full conversation history
  * @returns {{ system: string, messages: Array }} Anthropic-compatible payload shape
  */
-export function buildChatMessages(sanitizedUserInput, businessContext = 'combined') {
+export function buildChatMessages(sanitizedUserInput, businessContext = 'combined', sanitizedHistory = []) {
   const systemPrompt = getSystemPrompt(businessContext)
   const wrappedUserContent = `[USER MESSAGE START]\n${sanitizedUserInput}\n[USER MESSAGE END]`
+
+  if (sanitizedHistory.length > 0) {
+    // Wrap only the last user message; prior turns are already sanitized
+    const history = sanitizedHistory.slice(0, -1)
+    return {
+      system: systemPrompt,
+      messages: [
+        ...history,
+        { role: 'user', content: wrappedUserContent }
+      ]
+    }
+  }
 
   return {
     system: systemPrompt,

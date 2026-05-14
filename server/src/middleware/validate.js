@@ -55,6 +55,18 @@ async function validateChatInput(req, res, next) {
     return res.status(400).json({ error: sanitizeError.message })
   }
 
+  // If client sends full conversation history, sanitize each message content
+  if (Array.isArray(req.body.messages)) {
+    try {
+      req.sanitizedMessages = req.body.messages
+        .filter(m => m && (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string')
+        .slice(-40) // cap history depth
+        .map(m => ({ role: m.role, content: m.role === 'user' ? sanitizeInput(m.content) : m.content.substring(0, 4000) }))
+    } catch (sanitizeError) {
+      return res.status(400).json({ error: sanitizeError.message })
+    }
+  }
+
   // businessContext is validated against the allowlist above — safe to attach
   // Default to 'combined' if not present
   req.businessContext = VALID_BUSINESS_CONTEXTS.includes(req.body.businessContext)

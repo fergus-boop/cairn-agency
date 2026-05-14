@@ -21,10 +21,10 @@ const router = Router()
 router.options('/', (req, res) => { res.set('Access-Control-Allow-Origin', req.headers.origin || '*'); res.set('Access-Control-Allow-Methods', 'POST, OPTIONS'); res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization'); res.set('Access-Control-Allow-Credentials', 'true'); res.sendStatus(204); })
 router.post('/', chatRateLimit, validateChatInput, async (req, res) => {
   console.log('[chat] Handler reached — sanitizedMessage length:', req.sanitizedMessage?.length)
-  const { sanitizedMessage, businessContext } = req
+  const { sanitizedMessage, sanitizedMessages, businessContext } = req
 
   try {
-    const { system, messages } = buildChatMessages(sanitizedMessage, businessContext)
+    const { system, messages } = buildChatMessages(sanitizedMessage, businessContext, sanitizedMessages)
     console.log('[chat] Calling Anthropic API — businessContext:', businessContext)
 
     const response = await anthropic.messages.create({
