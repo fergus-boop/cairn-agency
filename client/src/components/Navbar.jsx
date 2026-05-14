@@ -56,7 +56,7 @@ export default function Navbar() {
               to="/"
               className="transition-opacity hover:opacity-80"
             >
-              <img src="/src/assets/cairn-logo.png" alt="CAIRN" className="h-8 w-auto" />
+              <img src="/images/cairn-logo.png" alt="CAIRN" className="h-8 w-auto" />
             </Link>
 
             {/* Desktop nav */}
@@ -116,7 +116,7 @@ export default function Navbar() {
         {/* Menu content */}
         <div className="relative z-10 flex flex-col justify-center items-center h-full gap-8 px-6">
           {/* Logo in mobile menu */}
-          <img src="/src/assets/cairn-logo.png" alt="CAIRN" className="h-10 w-auto mb-4" />
+          <img src="/images/cairn-logo.png" alt="CAIRN" className="h-10 w-auto mb-4" />
 
           {NAV_LINKS.map(({ label, href }, i) => (
             <a

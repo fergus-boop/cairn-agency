@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
-import cairngormsImg from '../assets/cairngorms.png';
+import cairngormsImg from '/images/cairngorms.png';
 
 export default function Hero() {
   const [visible, setVisible] = useState(false);

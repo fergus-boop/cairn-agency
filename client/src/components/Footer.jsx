@@ -32,7 +32,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="max-w-xs">
             <div className="mb-4">
-              <img src="/src/assets/cairn-logo.png" alt="CAIRN" className="h-8 w-auto" />
+              <img src="/images/cairn-logo.png" alt="CAIRN" className="h-8 w-auto" />
             </div>
             <p
               className="font-body font-light text-sm leading-relaxed"

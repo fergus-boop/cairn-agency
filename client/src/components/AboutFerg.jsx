@@ -51,7 +51,7 @@ export default function AboutFerg() {
               >
                 {/* Image 1 — bike */}
                 <img
-                  src="/src/assets/ferg-bike.jpg"
+                  src="/images/ferg-bike.jpg"
                   alt="Ferg on a mountain bike"
                   className="absolute inset-0 w-full h-full object-cover"
                   style={{
@@ -62,7 +62,7 @@ export default function AboutFerg() {
                 />
                 {/* Image 2 — ski */}
                 <img
-                  src="/src/assets/ferg-ski.jpg"
+                  src="/images/ferg-ski.jpg"
                   alt="Ferg skiing"
                   className="absolute inset-0 w-full h-full object-cover"
                   style={{

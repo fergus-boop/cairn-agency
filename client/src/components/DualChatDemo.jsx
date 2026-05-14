@@ -103,7 +103,7 @@ export default function DualChatDemo() {
                 welcomeMessage="Free-Ski Aviemore Assistant"
                 welcomeSub="Ask about ski lessons, snowboard coaching, bookings, and more."
                 suggestedPrompts={FREESKI_PROMPTS}
-                headerImage="/src/assets/freeski.jpg"
+                headerImage="/images/freeski.jpg"
                 headerImageFallback="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&w=800&q=80"
               />
             </div>
@@ -137,7 +137,7 @@ export default function DualChatDemo() {
                 welcomeMessage="TreeZone Aviemore Assistant"
                 welcomeSub="Ask about the high ropes course, bookings, ages, and more."
                 suggestedPrompts={TREEZONE_PROMPTS}
-                headerImage="/src/assets/treezone.jpg"
+                headerImage="/images/treezone.jpg"
                 headerImageFallback="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80"
               />
             </div>
