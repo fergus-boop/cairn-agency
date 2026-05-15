@@ -78,9 +78,26 @@ export default function AvieBikesDemo() {
       style={{
         background: 'rgba(6, 13, 8, 0.4)',
         borderColor: 'rgba(61, 158, 110, 0.2)',
-        height: '650px',
+        height: '680px',
       }}
     >
+      {/* Hero photo */}
+      <div className="relative flex-shrink-0 overflow-hidden rounded-t-xl" style={{ height: '180px' }}>
+        <img
+          src="/images/BookingSelect.jpg"
+          alt=""
+          className="w-full h-full object-cover object-center"
+          style={{ filter: 'brightness(0.7) contrast(1.05) saturate(0.85)' }}
+          loading="lazy"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(to bottom, transparent 40%, rgba(8,13,10,0.65) 100%)',
+          }}
+        />
+      </div>
+
       {/* Header */}
       <div
         className="px-6 py-4 flex items-center justify-between border-b"
