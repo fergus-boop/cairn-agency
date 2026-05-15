@@ -3,6 +3,16 @@ import { Send } from 'lucide-react';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3003';
 
+const OPENING_MESSAGE =
+  "Hey! I'm the Aviemore Bikes booking assistant 🚵 Let's get you sorted. How many riders are in your group?";
+
+const EXAMPLE_PROMPTS = [
+  'I want to book bikes for a group of 2',
+  'Do you have e-bikes available?',
+  'What time slots are available?',
+  "What's included in the hire?",
+];
+
 const SYSTEM_PROMPT = `You are the smart booking assistant for Aviemore Bikes, a bike hire shop in Aviemore village in the Cairngorms National Park, Scotland. You help customers book bikes by collecting all the information the shop needs in one smooth conversation.
 
 Bike types and pricing:
@@ -31,22 +41,23 @@ Once all info is collected, output a clean booking summary followed by the exact
 Be friendly, enthusiastic about the trails, and knowledgeable. You're a bike-loving local, not a call centre bot.`;
 
 export default function AvieBikesDemo() {
-  const [messages, setMessages] = useState([
-    {
-      role: 'assistant',
-      content: "Hey! I'm the Aviemore Bikes booking assistant 🚵 Let's get you sorted. How many riders are in your group?",
-    },
-  ]);
+  const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const [started, setStarted] = useState(false);
 
-  const handleSend = async () => {
-    if (!input.trim() || loading) return;
+  const sendMessage = async (text) => {
+    if (!text.trim() || loading) return;
 
-    const userMessage = input.trim();
+    const userMessage = text.trim();
     setInput('');
+    setStarted(true);
 
-    const updatedMessages = [...messages, { role: 'user', content: userMessage }];
+    const history = started
+      ? messages
+      : [{ role: 'assistant', content: OPENING_MESSAGE }];
+
+    const updatedMessages = [...history, { role: 'user', content: userMessage }];
     setMessages(updatedMessages);
     setLoading(true);
 
@@ -71,6 +82,9 @@ export default function AvieBikesDemo() {
       setLoading(false);
     }
   };
+
+  const handleSend = () => sendMessage(input);
+  const handlePrompt = (prompt) => sendMessage(prompt);
 
   return (
     <div
@@ -100,7 +114,7 @@ export default function AvieBikesDemo() {
 
       {/* Header */}
       <div
-        className="px-6 py-4 flex items-center justify-between border-b"
+        className="px-6 py-4 flex items-center justify-between border-b flex-shrink-0"
         style={{
           background: 'rgba(6, 13, 8, 0.6)',
           borderColor: 'rgba(61, 158, 110, 0.15)',
@@ -120,52 +134,111 @@ export default function AvieBikesDemo() {
         </span>
       </div>
 
-      {/* Messages */}
+      {/* Messages / pre-chat state */}
       <div
-        className="flex-1 overflow-y-auto px-6 py-4 space-y-4 flex flex-col"
+        className="flex-1 overflow-y-auto px-6 py-4 flex flex-col"
         style={{ color: 'var(--ca-frost)', scrollbarWidth: 'thin' }}
         data-lenis-prevent
       >
-        {messages.map((msg, idx) => (
-          <div
-            key={idx}
-            className={`flex w-full ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
-          >
-            <div
-              className="px-4 py-2 rounded-lg leading-relaxed"
-              style={{
-                maxWidth: msg.role === 'user' ? '60%' : '75%',
-                minHeight: '1.5em',
-                fontSize: '17px',
-                background:
-                  msg.role === 'user'
-                    ? 'rgba(61, 158, 110, 0.2)'
-                    : 'rgba(61, 158, 110, 0.1)',
-                color: 'var(--ca-frost)',
-              }}
-            >
-              {msg.content.split('\n').map((line, i) => {
-                const parts = line.split(/\*\*(.*?)\*\*/g);
-                return (
-                  <div key={i}>
-                    {parts.map((part, j) =>
-                      j % 2 === 1 ? (
-                        <strong key={j}>{part}</strong>
-                      ) : (
-                        <span key={j}>{part}</span>
-                      ),
-                    )}
-                  </div>
-                );
-              })}
+        {!started ? (
+          <div className="flex flex-col h-full">
+            <div className="flex justify-start mb-6">
+              <div
+                className="px-4 py-2 rounded-lg leading-relaxed"
+                style={{
+                  maxWidth: '75%',
+                  fontSize: '17px',
+                  background: 'rgba(61, 158, 110, 0.1)',
+                  color: 'var(--ca-frost)',
+                }}
+              >
+                {OPENING_MESSAGE}
+              </div>
+            </div>
+
+            <div className="mt-auto">
+              <p
+                className="font-body text-xs mb-3 tracking-wide uppercase"
+                style={{ color: 'var(--ca-muted)' }}
+              >
+                Try asking…
+              </p>
+              <div className="flex flex-col gap-2">
+                {EXAMPLE_PROMPTS.map((prompt) => (
+                  <button
+                    key={prompt}
+                    onClick={() => handlePrompt(prompt)}
+                    className="text-left px-4 py-2 rounded-lg border text-sm transition-colors hover:border-opacity-60 hover:bg-opacity-20"
+                    style={{
+                      border: '1px solid rgba(61, 158, 110, 0.25)',
+                      background: 'rgba(61, 158, 110, 0.06)',
+                      color: 'var(--ca-frost)',
+                    }}
+                  >
+                    {prompt}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
-        ))}
+        ) : (
+          <div className="space-y-4 flex flex-col">
+            {messages.map((msg, idx) => (
+              <div
+                key={idx}
+                className={`flex w-full ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
+                <div
+                  className="px-4 py-2 rounded-lg leading-relaxed"
+                  style={{
+                    maxWidth: msg.role === 'user' ? '60%' : '75%',
+                    minHeight: '1.5em',
+                    fontSize: '17px',
+                    background:
+                      msg.role === 'user'
+                        ? 'rgba(61, 158, 110, 0.2)'
+                        : 'rgba(61, 158, 110, 0.1)',
+                    color: 'var(--ca-frost)',
+                  }}
+                >
+                  {msg.content.split('\n').map((line, i) => {
+                    const parts = line.split(/\*\*(.*?)\*\*/g);
+                    return (
+                      <div key={i}>
+                        {parts.map((part, j) =>
+                          j % 2 === 1 ? (
+                            <strong key={j}>{part}</strong>
+                          ) : (
+                            <span key={j}>{part}</span>
+                          ),
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+            {loading && (
+              <div className="flex justify-start">
+                <div
+                  className="px-4 py-2 rounded-lg"
+                  style={{
+                    background: 'rgba(61, 158, 110, 0.1)',
+                    color: 'var(--ca-muted)',
+                    fontSize: '17px',
+                  }}
+                >
+                  …
+                </div>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Input */}
       <div
-        className="px-6 py-4 border-t flex gap-3"
+        className="px-6 py-4 border-t flex gap-3 flex-shrink-0"
         style={{
           background: 'rgba(6, 13, 8, 0.6)',
           borderColor: 'rgba(61, 158, 110, 0.15)',
@@ -176,7 +249,7 @@ export default function AvieBikesDemo() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-          placeholder="Type your response..."
+          placeholder="Type your message..."
           disabled={loading}
           className="flex-1 bg-transparent outline-none"
           style={{ color: 'var(--ca-frost)' }}

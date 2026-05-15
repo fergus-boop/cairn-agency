@@ -16,6 +16,74 @@ const TREEZONE_PROMPTS = [
   'What courses are available?',
 ];
 
+export function FreeSkiCard() {
+  return (
+    <div className="flex flex-col gap-3">
+      <div className="flex items-center justify-between">
+        <span
+          className="font-display font-black text-sm tracking-tight"
+          style={{ color: 'var(--ca-text)' }}
+        >
+          Free-Ski Aviemore
+        </span>
+        <span
+          className="font-display font-bold text-xs tracking-[0.15em] uppercase px-2 py-0.5"
+          style={{
+            background: 'rgba(61,158,110,0.1)',
+            border: '1px solid rgba(61,158,110,0.25)',
+            color: 'var(--ca-accent)',
+          }}
+        >
+          Live Demo
+        </span>
+      </div>
+      <EmbeddedChat
+        businessName="Free-Ski Aviemore"
+        businessContext="freeski"
+        welcomeMessage="Free-Ski Aviemore Assistant"
+        welcomeSub="Ask about ski lessons, snowboard coaching, bookings, and more."
+        suggestedPrompts={FREESKI_PROMPTS}
+        headerImage="/images/freeski.jpg"
+        headerImageFallback="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&w=800&q=80"
+      />
+    </div>
+  );
+}
+
+export function TreeZoneCard() {
+  return (
+    <div className="flex flex-col gap-3">
+      <div className="flex items-center justify-between">
+        <span
+          className="font-display font-black text-sm tracking-tight"
+          style={{ color: 'var(--ca-text)' }}
+        >
+          TreeZone Aviemore
+        </span>
+        <span
+          className="font-display font-bold text-xs tracking-[0.15em] uppercase px-2 py-0.5"
+          style={{
+            background: 'rgba(61,158,110,0.1)',
+            border: '1px solid rgba(61,158,110,0.25)',
+            color: 'var(--ca-accent)',
+          }}
+        >
+          Live Demo
+        </span>
+      </div>
+      <EmbeddedChat
+        businessName="TreeZone Aviemore"
+        businessContext="treezone-aviemore"
+        welcomeMessage="TreeZone Aviemore Assistant"
+        welcomeSub="Ask about the high ropes course, bookings, ages, and more."
+        suggestedPrompts={TREEZONE_PROMPTS}
+        headerImage="/images/treezone.jpg"
+        headerImageFallback="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80"
+      />
+    </div>
+  );
+}
+
 export default function DualChatDemo() {
   const scrollToContact = () => {
     const el = document.getElementById('contact');
