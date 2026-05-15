@@ -162,8 +162,9 @@ export default function AvieBikesDemo() {
 
               {/* Messages */}
               <div
-                className="flex-1 px-6 py-4 space-y-4 flex flex-col"
-                style={{ color: 'var(--ca-frost)', overflowY: 'scroll', WebkitOverflowScrolling: 'touch', touchAction: 'pan-y' }}
+                className="flex-1 overflow-y-auto px-6 py-4 space-y-4 flex flex-col"
+                style={{ color: 'var(--ca-frost)', scrollbarWidth: 'thin' }}
+                data-lenis-prevent
               >
                 {messages.map((msg, idx) => (
                   <div
