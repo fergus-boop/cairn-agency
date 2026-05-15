@@ -104,18 +104,7 @@ export default function AboutFerg() {
                 className="font-body font-light text-base leading-relaxed"
                 style={{ color: 'var(--ca-frost)' }}
               >
-                Ski instructor, MTB shredder, ropes course worker, bike mechanic,
-                mechanical engineering student. I've spent years inside the businesses
-                Cairn builds for — I know exactly where the gaps are. Based in the
-                Cairngorms. Expanding to British Columbia.
-              </p>
-              <p
-                className="font-body font-light text-base leading-relaxed"
-                style={{ color: 'var(--ca-muted)' }}
-              >
-                Every solution is built from real operational knowledge, not a
-                generic template. Fast to build, easy to hand over, built to
-                actually work for your specific business.
+                Local to the mountains we all love, ski instructor, mountain biker, mechanical engineer — years spent in and around the businesses Cairn builds for. I know exactly where the gaps are, and I strive to deliver the best possible outcome for every client.
               </p>
             </div>
 
@@ -129,7 +118,7 @@ export default function AboutFerg() {
                   className="font-display font-black text-sm tracking-tight mb-0.5"
                   style={{ color: 'var(--ca-accent)' }}
                 >
-                  Ski Instructor
+                  Ski Lover & Instructor
                 </div>
                 <div
                   className="font-body text-xs"
@@ -143,13 +132,13 @@ export default function AboutFerg() {
                   className="font-display font-black text-sm tracking-tight mb-0.5"
                   style={{ color: 'var(--ca-accent)' }}
                 >
-                  MTB Shredder & Mechanic
+                  Mountain Biker
                 </div>
                 <div
                   className="font-body text-xs"
                   style={{ color: 'var(--ca-muted)' }}
                 >
-                  Cairngorms trails
+                  Highlands & Beyond
                 </div>
               </div>
               <div>
@@ -157,13 +146,13 @@ export default function AboutFerg() {
                   className="font-display font-black text-sm tracking-tight mb-0.5"
                   style={{ color: 'var(--ca-accent)' }}
                 >
-                  Ropes Course
+                  Born & Raised
                 </div>
                 <div
                   className="font-body text-xs"
                   style={{ color: 'var(--ca-muted)' }}
                 >
-                  TreeZone Aviemore
+                  Aviemore
                 </div>
               </div>
               <div>
@@ -178,6 +167,20 @@ export default function AboutFerg() {
                   style={{ color: 'var(--ca-muted)' }}
                 >
                   Heriot-Watt University
+                </div>
+              </div>
+              <div>
+                <div
+                  className="font-display font-black text-sm tracking-tight mb-0.5"
+                  style={{ color: 'var(--ca-accent)' }}
+                >
+                  All-Round Go-Getter
+                </div>
+                <div
+                  className="font-body text-xs"
+                  style={{ color: 'var(--ca-muted)' }}
+                >
+                  Driven to deliver
                 </div>
               </div>
             </div>
