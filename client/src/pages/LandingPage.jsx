@@ -5,6 +5,7 @@ import WhyCairn from '../components/WhyCairn.jsx';
 import AboutFerg from '../components/AboutFerg.jsx';
 import DualChatDemo from '../components/DualChatDemo.jsx';
 import AvieBikesDemo from '../components/AvieBikesDemo.jsx';
+import AvieBikesRoutesBot from '../components/AvieBikesRoutesBot.jsx';
 import ContactSection from '../components/ContactSection.jsx';
 import Footer from '../components/Footer.jsx';
 
@@ -18,6 +19,7 @@ export default function LandingPage() {
       <AboutFerg />
       <DualChatDemo />
       <AvieBikesDemo />
+      <AvieBikesRoutesBot />
       <ContactSection />
       <Footer />
     </main>
