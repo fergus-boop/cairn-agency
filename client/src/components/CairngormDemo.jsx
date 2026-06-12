@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Send } from 'lucide-react';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3003';
 
 const OPENING_MESSAGE =
   "Welcome to Cairngorm Mountain ⛰️ Scotland's favourite mountain resort. Whether you're planning a ski day, a funicular trip, a summer bike park visit, or just wondering what to expect — I'm here to help. What can I help you with today?";
@@ -35,7 +34,7 @@ export default function CairngormDemo() {
     setLoading(true);
 
     try {
-      const response = await fetch(`${API_URL}/api/chat`, {
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

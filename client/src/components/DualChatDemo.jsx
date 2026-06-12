@@ -3,7 +3,6 @@ import { Send } from 'lucide-react';
 import BackgroundPaths from './BackgroundPaths.jsx';
 import ScrollReveal from './ui/ScrollReveal.jsx';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3003';
 
 const FREESKI_PROMPTS = [
   'Tell me about Free-Ski lessons',
@@ -47,7 +46,7 @@ function ChatCard({ businessName, businessContext, openingMessage, examplePrompt
     setLoading(true);
 
     try {
-      const response = await fetch(`${API_URL}/api/chat`, {
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

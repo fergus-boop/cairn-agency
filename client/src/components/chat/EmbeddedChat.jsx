@@ -1,11 +1,9 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { useAuth } from '@clerk/clerk-react';
 import { AlertTriangle, ArrowUpRight } from 'lucide-react';
 import MessageBubble from './MessageBubble.jsx';
 import MessageInput from './MessageInput.jsx';
 import TypingIndicator from './TypingIndicator.jsx';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3003';
 
 const handleChipMouseMove = (e) => {
   const rect = e.currentTarget.getBoundingClientRect();
@@ -30,7 +28,6 @@ export default function EmbeddedChat({
   headerImage,
   headerImageFallback,
 }) {
-  const { getToken } = useAuth();
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -56,12 +53,9 @@ export default function EmbeddedChat({
     setError(null);
 
     try {
-      const token = await getToken().catch(() => null);
-
       const headers = { 'Content-Type': 'application/json' };
-      if (token) headers['Authorization'] = `Bearer ${token}`;
 
-      const response = await fetch(`${API_URL}/api/chat`, {
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers,
         body: JSON.stringify({ message: trimmed, businessContext }),
@@ -86,7 +80,7 @@ export default function EmbeddedChat({
     } finally {
       setIsLoading(false);
     }
-  }, [getToken, isLoading, businessContext]);
+  }, [isLoading, businessContext]);
 
   const headingText = welcomeMessage || `${businessName} Assistant`;
   const subText = welcomeSub || `Ask me anything about ${businessName}`;

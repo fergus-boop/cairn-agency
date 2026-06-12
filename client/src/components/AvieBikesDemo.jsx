@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Send } from 'lucide-react';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3003';
 
 const OPENING_MESSAGE =
   "Hey! I'm the Aviemore Bikes booking assistant 🚵 Let's get you sorted. How many riders are in your group?";
@@ -62,7 +61,7 @@ export default function AvieBikesDemo() {
     setLoading(true);
 
     try {
-      const response = await fetch(`${API_URL}/api/chat`, {
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: userMessage, messages: updatedMessages, businessContext: 'aviemore-bikes' }),

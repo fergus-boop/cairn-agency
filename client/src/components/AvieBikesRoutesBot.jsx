@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { Send } from 'lucide-react';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3003';
 
 const OPENING_MESSAGE =
   "Hey! I'm the Aviemore Bikes routes assistant 🏔️ Whether you're brand new to mountain biking or an experienced rider looking for something gnarly — I'll help you find the perfect ride. What kind of riding are you after today?";
@@ -36,7 +35,7 @@ export default function AvieBikesRoutesBot() {
     setLoading(true);
 
     try {
-      const response = await fetch(`${API_URL}/api/chat`, {
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

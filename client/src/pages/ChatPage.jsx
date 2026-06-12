@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react';
 import ChatShell from '../components/chat/ChatShell.jsx';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3003';
 
 export default function ChatPage() {
   const [messages, setMessages] = useState([]);
@@ -18,7 +17,7 @@ export default function ChatPage() {
     setError(null);
 
     try {
-      const response = await fetch(`${API_URL}/api/chat`, {
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
