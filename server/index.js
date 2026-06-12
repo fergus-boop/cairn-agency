@@ -4,6 +4,10 @@ import helmet from 'helmet'
 import cors from 'cors'
 import { clerkMiddleware } from '@clerk/express'
 import chatRouter from './src/routes/chat.js'
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const app = express()
 const PORT = process.env.PORT || 3003
@@ -11,7 +15,7 @@ const PORT = process.env.PORT || 3003
 const corsOptions = {
   origin: process.env.CLIENT_URL
     ? [process.env.CLIENT_URL]
-    : ['http://localhost:5173', 'http://localhost:5174'],
+    : ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175', 'http://localhost:5176', 'http://localhost:5177'],
   credentials: true
 }
 
@@ -33,6 +37,10 @@ app.use('/api/chat', chatRouter)
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', service: 'treezone-api' })
 })
+
+const clientDist = path.join(__dirname, '../client/dist')
+app.use(express.static(clientDist))
+app.get('*', (req, res) => res.sendFile(path.join(clientDist, 'index.html')))
 
 app.use((err, req, res, next) => {
   console.error('[treezone-api] Unhandled error:', err.stack)
