@@ -35,7 +35,7 @@ export default function Features() {
   return (
     <section
       id="features"
-      className="relative pt-10 pb-16 lg:pt-12 lg:pb-20 noise-overlay"
+      className="relative pt-8 pb-10 lg:pt-10 lg:pb-14 noise-overlay"
       style={{ background: 'var(--ca-surface)' }}
     >
       <BackgroundPaths intensity={0.6} />

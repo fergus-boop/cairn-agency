@@ -108,7 +108,7 @@ export default function Hero() {
               animation: visible ? 'fadeInUp 0.8s 0.26s ease forwards' : 'none',
             }}
           >
-            We find what's costing your business leads, time, and money — then we build the fix.
+            Barbers, trades, tours, shops — we build the website, chatbot, and online shop that keep your business working while you're not.
           </p>
 
           {/* CTAs */}
