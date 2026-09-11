@@ -6,6 +6,7 @@ import { clerkMiddleware } from '@clerk/express'
 import chatRouter from './src/routes/chat.js'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { createSeoHandler } from './seo.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -39,8 +40,9 @@ app.get('/api/health', (req, res) => {
 })
 
 const clientDist = path.join(__dirname, '../client/dist')
-app.use(express.static(clientDist))
-app.get('*', (req, res) => res.sendFile(path.join(clientDist, 'index.html')))
+app.get(/^(?!\/api)/, createSeoHandler(clientDist))
+app.use(express.static(clientDist, { index: false }))
+app.get('*', (req, res) => res.status(404).type('text').send('Page not found.'))
 
 app.use((err, req, res, next) => {
   console.error('[treezone-api] Unhandled error:', err.stack)
