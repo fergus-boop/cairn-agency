@@ -1,5 +1,21 @@
 import { Link } from 'react-router-dom';
 
+function CairnMark({ size = 'md' }) {
+  const wordSize = size === 'sm' ? '0.75rem' : '0.875rem';
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+      <svg width="18" height="22" viewBox="0 0 20 24" fill="none" aria-hidden="true">
+        <rect x="1" y="18" width="18" height="5" rx="2" fill="#3d9e6e" />
+        <rect x="3" y="11" width="14" height="5" rx="2" fill="#3d9e6e" />
+        <rect x="5.5" y="4" width="9" height="5" rx="2" fill="#3d9e6e" />
+      </svg>
+      <span style={{ fontFamily: 'Unbounded, sans-serif', fontWeight: 700, color: '#fff', letterSpacing: '0.18em', fontSize: wordSize }}>
+        CAIRN
+      </span>
+    </div>
+  );
+}
+
 const FOOTER_LINKS = {
   Services: [
     { label: 'Websites', href: '#features' },
@@ -11,8 +27,8 @@ const FOOTER_LINKS = {
     { label: 'Contact', href: '#contact' },
   ],
   Legal: [
-    { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Service', href: '#' },
+    { label: 'Privacy Policy', href: '/privacy' },
+    { label: 'Terms of Service', href: '/terms' },
   ],
 };
 
@@ -32,7 +48,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="max-w-xs">
             <div className="mb-4">
-              <img src="/images/cairn-logo.png" alt="CAIRN" className="h-8 w-auto" />
+              <CairnMark size="sm" />
             </div>
             <p
               className="font-body font-light text-sm leading-relaxed"

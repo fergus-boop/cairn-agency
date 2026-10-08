@@ -80,7 +80,7 @@ function TrimCoCard() {
         </p>
 
         <div className="flex flex-col gap-2 mt-5">
-          {['230★ reviews integrated', '10-product shop', 'AI trained on the full catalogue'].map((chip) => (
+          {['234★ reviews integrated', '10-product shop', 'AI trained on the full catalogue'].map((chip) => (
             <div
               key={chip}
               style={{

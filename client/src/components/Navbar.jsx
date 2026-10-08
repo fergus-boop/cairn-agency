@@ -2,6 +2,21 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 
+function CairnMark() {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+      <svg width="18" height="22" viewBox="0 0 20 24" fill="none" aria-hidden="true">
+        <rect x="1" y="18" width="18" height="5" rx="2" fill="#3d9e6e" />
+        <rect x="3" y="11" width="14" height="5" rx="2" fill="#3d9e6e" />
+        <rect x="5.5" y="4" width="9" height="5" rx="2" fill="#3d9e6e" />
+      </svg>
+      <span style={{ fontFamily: 'Unbounded, sans-serif', fontWeight: 700, color: '#fff', letterSpacing: '0.18em', fontSize: '0.875rem' }}>
+        CAIRN
+      </span>
+    </div>
+  );
+}
+
 const NAV_LINKS = [
   { label: 'How It Works', href: '#features' },
   { label: 'Live Demo', href: '#demo' },
@@ -55,8 +70,9 @@ export default function Navbar() {
             <Link
               to="/"
               className="transition-opacity hover:opacity-80"
+              aria-label="CAIRN home"
             >
-              <img src="/images/cairn-logo.png" alt="CAIRN" className="h-8 w-auto" />
+              <CairnMark />
             </Link>
 
             {/* Desktop nav */}
@@ -116,7 +132,7 @@ export default function Navbar() {
         {/* Menu content */}
         <div className="relative z-10 flex flex-col justify-center items-center h-full gap-8 px-6">
           {/* Logo in mobile menu */}
-          <img src="/images/cairn-logo.png" alt="CAIRN" className="h-10 w-auto mb-4" />
+          <div className="mb-4"><CairnMark /></div>
 
           {NAV_LINKS.map(({ label, href }, i) => (
             <a

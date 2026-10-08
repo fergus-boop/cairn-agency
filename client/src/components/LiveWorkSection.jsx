@@ -119,7 +119,7 @@ export default function LiveWorkSection() {
 
                 {/* Stat chips */}
                 <div className="flex flex-wrap gap-3">
-                  {['230★ reviews integrated', '10-product shop', 'AI trained on the full catalogue'].map((chip) => (
+                  {['234★ reviews integrated', '10-product shop', 'AI trained on the full catalogue'].map((chip) => (
                     <div
                       key={chip}
                       className="flex items-center px-3 py-1.5 rounded-full"
