@@ -83,3 +83,6 @@ client/src/assets/*.png
 client/src/assets/*.jpg
 client/src/assets/*.jpeg
 client/src/assets/*.webp
+
+# Codex handoff (local only)
+CODEX-BRIEF.md
