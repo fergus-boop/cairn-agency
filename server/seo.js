@@ -1,45 +1,110 @@
 import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const origin = 'https://cairn.agency';
+const here = dirname(fileURLToPath(import.meta.url));
+
+// Same text as DESCRIPTION in client/src/data/site.js.
+const description =
+  'Cairn builds websites and the systems behind them for small, owner-run businesses: online ordering and bookings, admin pages owners run themselves, direct booking for holiday lets, and automatic replies to missed calls and enquiries.';
+
+// No street address or phone on purpose: Cairn is home-based and remote. Add sameAs (Google Business
+// Profile URL) once Ferg supplies it.
 export const business = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
+  '@type': 'ProfessionalService',
   '@id': origin + '/#organization',
-  name: 'CAIRN',
+  name: 'Cairn',
+  alternateName: 'CAIRN',
   url: origin + '/',
-  description: 'Websites, AI chatbots and online shops for local businesses.',
+  description,
   email: 'fergus@cairn.agency',
+  logo: origin + '/favicon.svg',
+  address: { '@type': 'PostalAddress', addressLocality: 'Edinburgh', addressCountry: 'GB' },
+  founder: { '@type': 'Person', name: 'Fergus Masson', jobTitle: 'Founder' },
+  knowsLanguage: 'en',
+  makesOffer: [
+    'Websites and the systems behind them',
+    'Direct booking for holiday lets',
+    'Lead automations',
+  ].map((name) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name } })),
 };
+
+// [title, description, noindex?]
 export const pages = {
-  '/': ['CAIRN | Websites, AI Chatbots & Online Shops', 'CAIRN designs and builds websites, AI chatbots and online shops for local businesses. Explore our work and get in touch.'],
-  '/chat': ['Chat with CAIRN | Website & AI Enquiries', 'Talk to CAIRN about websites, AI chatbots and online shops for your business.'],
-  '/privacy': ['Privacy Policy | CAIRN', 'How CAIRN handles personal information and enquiries through its website.'],
-  '/terms': ['Terms & Conditions | CAIRN', 'Terms and conditions for using the CAIRN website and services.'],
+  '/': [
+    'Cairn | Websites and the systems behind them',
+    'Websites, online ordering and bookings, admin pages you run yourself, direct booking for holiday lets and automatic replies, for small owner-run businesses. Fergus Masson, Edinburgh.',
+  ],
+  '/services': [
+    'Services | Websites, holiday-let direct booking and lead automations | Cairn',
+    'What Cairn builds: websites with ordering, booking and admin pages, direct booking sites and guest pages for holiday lets, and missed-call text-back and instant enquiry replies.',
+  ],
+  '/about': [
+    'About Fergus Masson | Cairn, Edinburgh',
+    'Cairn is Fergus Masson, a one-person web studio in Edinburgh building websites and the systems behind them for small, owner-run businesses in any English-speaking country.',
+  ],
+  '/faq': [
+    'FAQ | Cost, timelines and ownership | Cairn',
+    'Answers to what small business owners ask before hiring Cairn: cost, timelines, who owns the site, what happens after launch and working remotely.',
+  ],
+  '/chat': [
+    'Ask about Cairn | Cairn assistant',
+    'Ask the Cairn assistant what Cairn builds, how a job runs and how to get in touch.',
+  ],
+  '/privacy': ['Privacy Policy | Cairn', 'How Cairn handles personal information and enquiries through its website.'],
+  '/terms': ['Terms & Conditions | Cairn', 'Terms and conditions for using the Cairn website and services.'],
 };
+
+function readFaq() {
+  try {
+    return JSON.parse(readFileSync(join(here, '../client/src/data/faq.json'), 'utf8'));
+  } catch {
+    return [];
+  }
+}
+
+function structuredData(route) {
+  const blocks = [business];
+  if (route === '/faq') {
+    const faq = readFaq();
+    if (faq.length) {
+      blocks.push({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faq.map(({ q, a }) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+      });
+    }
+  }
+  return blocks;
+}
 
 const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 
 export function renderSeoHtml(template, route) {
   const page = pages[route];
   if (!page) return null;
-  const [title, description, noindex = false] = page;
+  const [title, pageDescription, noindex = false] = page;
   const url = origin + route;
   const head = [
     `<title>${escapeHtml(title)}</title>`,
-    `<meta name="description" content="${escapeHtml(description)}" />`,
+    `<meta name="description" content="${escapeHtml(pageDescription)}" />`,
     `<meta name="robots" content="${noindex ? 'noindex, follow' : 'index, follow'}" />`,
     `<link rel="canonical" href="${url}" />`,
     `<meta property="og:type" content="website" />`,
-    `<meta property="og:site_name" content="${escapeHtml(business.name)}" />`,
+    `<meta property="og:site_name" content="Cairn" />`,
     `<meta property="og:title" content="${escapeHtml(title)}" />`,
-    `<meta property="og:description" content="${escapeHtml(description)}" />`,
+    `<meta property="og:description" content="${escapeHtml(pageDescription)}" />`,
     `<meta property="og:url" content="${url}" />`,
-    `<script type="application/ld+json">${JSON.stringify(business).replace(/</g, '\\u003c')}</script>`,
+    `<meta name="twitter:card" content="summary" />`,
+    ...structuredData(route).map(
+      (block) => `<script type="application/ld+json">${JSON.stringify(block).replace(/</g, '\\u003c')}</script>`
+    ),
   ].join('\n    ');
   return template
     .replace(/<title>[\s\S]*?<\/title>/gi, '')
-    .replace(/<meta\b[^>]*(?:name=["'](?:description|robots)["']|property=["']og:[^"']*["'])[^>]*>/gi, '')
+    .replace(/<meta\b[^>]*(?:name=["'](?:description|robots|twitter:[^"']*)["']|property=["']og:[^"']*["'])[^>]*>/gi, '')
     .replace(/<link\b[^>]*rel=["']canonical["'][^>]*>/gi, '')
     .replace(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>[\s\S]*?<\/script>/gi, '')
     .replace('</head>', `    ${head}\n  </head>`);
@@ -50,7 +115,6 @@ export function createSeoHandler(clientDistPath) {
   return (req, res, next) => {
     const route = req.path.length > 1 ? req.path.replace(/\/+$/, '') : '/';
     if (route === '/index.html') return res.redirect(301, '/');
-    if (route === '/shop' && pages['/txture']) return res.redirect(301, '/txture');
     if (!Object.hasOwn(pages, route)) return next();
     try {
       template ??= readFileSync(join(clientDistPath, 'index.html'), 'utf8');
@@ -61,4 +125,3 @@ export function createSeoHandler(clientDistPath) {
     }
   };
 }
-

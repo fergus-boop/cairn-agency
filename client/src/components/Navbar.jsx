@@ -1,168 +1,106 @@
-import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
+import CairnMark from './site/CairnMark.jsx';
+import { BOOKING_IS_EMAIL, BOOKING_URL } from '../data/site.js';
 
-function CairnMark() {
-  return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-      <svg width="18" height="22" viewBox="0 0 20 24" fill="none" aria-hidden="true">
-        <rect x="1" y="18" width="18" height="5" rx="2" fill="#3d9e6e" />
-        <rect x="3" y="11" width="14" height="5" rx="2" fill="#3d9e6e" />
-        <rect x="5.5" y="4" width="9" height="5" rx="2" fill="#3d9e6e" />
-      </svg>
-      <span style={{ fontFamily: 'Unbounded, sans-serif', fontWeight: 700, color: '#fff', letterSpacing: '0.18em', fontSize: '0.875rem' }}>
-        CAIRN
-      </span>
-    </div>
-  );
-}
+const CTA = BOOKING_IS_EMAIL ? 'Ask for a free look' : 'Book a free look';
 
-const NAV_LINKS = [
-  { label: 'How It Works', href: '#features' },
-  { label: 'Live Demo', href: '#demo' },
-  { label: 'Contact', href: '#contact' },
+const LINKS = [
+  { to: '/services', label: 'Services' },
+  { to: '/#work', label: 'Work' },
+  { to: '/about', label: 'About' },
+  { to: '/faq', label: 'FAQ' },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const { pathname } = useLocation();
+  const [open, setOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Close mobile menu on route change
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
+  useEffect(() => setOpen(false), [location.pathname, location.hash]);
 
-  const handleNavClick = (e, href) => {
-    if (href.startsWith('#') && pathname === '/') {
-      e.preventDefault();
-      const target = document.querySelector(href);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }
-    setMobileOpen(false);
-  };
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => e.key === 'Escape' && setOpen(false);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open]);
+
+  const linkClass = ({ isActive }) =>
+    `rounded-full px-3.5 py-2 text-[0.95rem] font-medium transition-colors ${
+      isActive ? 'text-ink' : 'text-ink-soft hover:text-ink'
+    }`;
 
   return (
-    <>
-      <nav
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
-        style={{
-          background: scrolled
-            ? 'rgba(6,13,8,0.92)'
-            : 'transparent',
-          backdropFilter: scrolled ? 'blur(20px)' : 'none',
-          borderBottom: scrolled
-            ? '1px solid rgba(61,158,110,0.1)'
-            : '1px solid transparent',
-        }}
+    <header
+      className={`sticky top-0 z-40 transition-colors duration-200 ${
+        scrolled || open ? 'border-b border-line bg-paper/95 backdrop-blur' : 'border-b border-transparent bg-paper'
+      }`}
+    >
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded focus:bg-ink focus:px-3 focus:py-2 focus:text-paper"
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="flex items-center justify-between h-16 lg:h-20">
-            {/* Logo */}
-            <Link
-              to="/"
-              className="transition-opacity hover:opacity-80"
-              aria-label="CAIRN home"
-            >
-              <CairnMark />
-            </Link>
+        Skip to content
+      </a>
+      <div className="wrap flex h-[4.5rem] items-center justify-between gap-6">
+        <Link to="/" aria-label="Cairn home" className="shrink-0">
+          <CairnMark />
+        </Link>
 
-            {/* Desktop nav */}
-            <div className="hidden md:flex items-center gap-10">
-              {NAV_LINKS.map(({ label, href }) => (
-                <a
-                  key={label}
-                  href={href}
-                  onClick={(e) => handleNavClick(e, href)}
-                  className="mint-underline font-body text-sm font-medium tracking-wide transition-colors"
-                  style={{ color: 'var(--ca-frost)' }}
-                >
-                  {label}
-                </a>
-              ))}
-            </div>
+        <nav aria-label="Main" className="hidden items-center gap-1 md:flex">
+          {LINKS.map((l) =>
+            l.to.includes('#') ? (
+              <Link key={l.to} to={l.to} className="rounded-full px-3.5 py-2 text-[0.95rem] font-medium text-ink-soft transition-colors hover:text-ink">
+                {l.label}
+              </Link>
+            ) : (
+              <NavLink key={l.to} to={l.to} className={linkClass}>
+                {l.label}
+              </NavLink>
+            )
+          )}
+        </nav>
 
-            {/* CTA button */}
-            <div className="hidden md:flex items-center gap-4">
-              <button
-                onClick={(e) => handleNavClick(e, '#demo')}
-                className="btn-primary text-xs"
-              >
-                <span>Enter</span>
-                <ArrowUpRight size={14} />
-              </button>
-            </div>
-
-            {/* Mobile hamburger */}
-            <button
-              className="md:hidden p-2 transition-colors"
-              style={{ color: 'var(--ca-frost)' }}
-              onClick={() => setMobileOpen((v) => !v)}
-              aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-            >
-              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* Mobile menu overlay */}
-      <div
-        className="fixed inset-0 z-40 md:hidden transition-all duration-300"
-        style={{
-          opacity: mobileOpen ? 1 : 0,
-          pointerEvents: mobileOpen ? 'all' : 'none',
-        }}
-      >
-        {/* Backdrop */}
-        <div
-          className="absolute inset-0"
-          style={{ background: 'rgba(6,13,8,0.96)', backdropFilter: 'blur(24px)' }}
-          onClick={() => setMobileOpen(false)}
-        />
-
-        {/* Menu content */}
-        <div className="relative z-10 flex flex-col justify-center items-center h-full gap-8 px-6">
-          {/* Logo in mobile menu */}
-          <div className="mb-4"><CairnMark /></div>
-
-          {NAV_LINKS.map(({ label, href }, i) => (
-            <a
-              key={label}
-              href={href}
-              onClick={(e) => handleNavClick(e, href)}
-              className="font-display font-bold text-3xl tracking-tight transition-colors"
-              style={{
-                color: 'var(--ca-text)',
-                animationDelay: `${i * 80}ms`,
-              }}
-            >
-              {label}
-            </a>
-          ))}
-
-          <div className="mt-6 flex flex-col items-center gap-4 w-full max-w-xs">
-            <button
-              onClick={(e) => {
-                handleNavClick(e, '#demo');
-                setMobileOpen(false);
-              }}
-              className="btn-primary w-full justify-center"
-            >
-              <span>Enter</span>
-              <ArrowUpRight size={14} />
-            </button>
-          </div>
+        <div className="flex items-center gap-2">
+          <a href={BOOKING_URL} className="btn-primary hidden !min-h-[2.6rem] !px-5 !py-2 sm:inline-flex">
+            {CTA}
+          </a>
+          <button
+            type="button"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full text-ink hover:bg-ink/5 md:hidden"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X size={22} /> : <Menu size={22} />}
+          </button>
         </div>
       </div>
-    </>
+
+      {open && (
+        <div id="mobile-menu" className="border-t border-line bg-paper md:hidden">
+          <nav aria-label="Mobile" className="wrap flex flex-col py-3">
+            {LINKS.map((l) => (
+              <Link key={l.to} to={l.to} className="border-b border-line py-3.5 font-display text-lg font-medium text-ink last:border-0">
+                {l.label}
+              </Link>
+            ))}
+            <a href={BOOKING_URL} className="btn-primary mb-2 mt-4 w-full">
+              {CTA}
+            </a>
+          </nav>
+        </div>
+      )}
+    </header>
   );
 }

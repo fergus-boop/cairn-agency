@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://cairn.agency/</loc></url>
-  <url><loc>https://cairn.agency/chat</loc></url>
+  <url><loc>https://cairn.agency/</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://cairn.agency/services</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://cairn.agency/about</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://cairn.agency/faq</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://cairn.agency/chat</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://cairn.agency/privacy</loc></url>
   <url><loc>https://cairn.agency/terms</loc></url>
 </urlset>

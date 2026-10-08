@@ -1,12 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import Footer from '../components/Footer.jsx';
+import Navbar from '../components/Navbar.jsx';
 
 export default function PrivacyPage() {
   const navigate = useNavigate();
 
   return (
     <>
+    <Navbar />
     <div
       className="min-h-screen"
       style={{ background: 'var(--ca-black)', color: 'var(--ca-frost)' }}

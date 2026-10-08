@@ -1,53 +1,43 @@
-import { useState, useCallback } from 'react';
-import ChatShell from '../components/chat/ChatShell.jsx';
-
+import Navbar from '../components/Navbar.jsx';
+import Footer from '../components/Footer.jsx';
+import PageHeader from '../components/site/PageHeader.jsx';
+import DemoChat from '../components/site/DemoChat.jsx';
+import Reveal from '../components/site/Reveal.jsx';
+import { EMAIL } from '../data/site.js';
 
 export default function ChatPage() {
-  const [messages, setMessages] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const handleSendMessage = useCallback(async (content) => {
-    const trimmed = content.trim();
-    if (!trimmed || isLoading) return;
-
-    const userMessage = { role: 'user', content: trimmed };
-    setMessages((prev) => [...prev, userMessage]);
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message: trimmed }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || `Server error ${response.status}`);
-      }
-
-      const data = await response.json();
-      const assistantMessage = { role: 'assistant', content: data.reply };
-      setMessages((prev) => [...prev, assistantMessage]);
-    } catch (err) {
-      setError(err.message || 'Something went wrong. Please try again.');
-      // Remove the optimistically-added user message on hard error
-      setMessages((prev) => prev.slice(0, -1));
-    } finally {
-      setIsLoading(false);
-    }
-  }, [isLoading]);
-
   return (
-    <ChatShell
-      messages={messages}
-      onSendMessage={handleSendMessage}
-      isLoading={isLoading}
-      error={error}
-    />
+    <>
+      <Navbar />
+      <main id="main">
+        <PageHeader
+          label="Assistant"
+          title="Ask about Cairn"
+          lede="Questions about what Cairn builds, how a job runs or how to get started. For anything specific to your business, Ferg replies to every email in person."
+        />
+        <section className="wrap pb-24">
+          <Reveal className="max-w-3xl">
+            <DemoChat
+              context="cairn"
+              tone="paper"
+              tall
+              badge="AI assistant"
+              title="Cairn assistant"
+              note="Answers from the same information as this site"
+              opening="Hi, I'm Cairn's assistant. Ask me what Cairn builds, how a job runs or how to get in touch."
+              prompts={['What do you build?', 'How does the free look work?', 'How much does a website cost?', 'Do you work outside Scotland?']}
+            />
+            <p className="mt-5 text-sm text-ink-muted">
+              Messages are answered by an AI model and aren't sent to Ferg. To reach him, email{' '}
+              <a className="link font-medium" href={`mailto:${EMAIL}`}>
+                {EMAIL}
+              </a>
+              .
+            </p>
+          </Reveal>
+        </section>
+      </main>
+      <Footer />
+    </>
   );
 }

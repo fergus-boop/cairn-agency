@@ -1,7 +1,7 @@
 import { body, validationResult } from 'express-validator'
 import { sanitizeInput } from '../utils/sanitize.js'
 
-const VALID_BUSINESS_CONTEXTS = ['freeski', 'treezone-aviemore', 'combined', 'aviemore-bikes', 'aviemore-bikes-routes', 'cairngorm-mountain', 'iye-aviemore']
+const VALID_BUSINESS_CONTEXTS = ['cairn', 'demo-ski-school', 'demo-bike-routes', 'freeski', 'treezone-aviemore', 'combined', 'aviemore-bikes', 'aviemore-bikes-routes', 'cairngorm-mountain', 'iye-aviemore']
 
 /**
  * Validation rules for the chat endpoint.
@@ -68,10 +68,10 @@ async function validateChatInput(req, res, next) {
   }
 
   // businessContext is validated against the allowlist above — safe to attach
-  // Default to 'combined' if not present
+  // Default to the Cairn assistant if not present (never a named third-party business)
   req.businessContext = VALID_BUSINESS_CONTEXTS.includes(req.body.businessContext)
     ? req.body.businessContext
-    : 'combined'
+    : 'cairn'
 
   next()
 }

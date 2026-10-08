@@ -1,4 +1,25 @@
+# Search and AI search crawlers are welcome.
 User-agent: *
+Allow: /
+Disallow: /api/
+
+# Named explicitly so AI search engines can cite the site.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Google-Extended
 Allow: /
 
 Sitemap: https://cairn.agency/sitemap.xml

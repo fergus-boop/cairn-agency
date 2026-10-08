@@ -1,0 +1,42 @@
+[
+  {
+    "q": "How much does it cost?",
+    "a": "It depends on what gets built, so there are no prices on the site. After the free look you get a quote for the build and a monthly figure for hosting and looking after it, before anything starts."
+  },
+  {
+    "q": "What is the free look?",
+    "a": "I go through your website, Google listing, booking and enquiry routes the way a customer would, and tell you where people are likely dropping off. You get it in plain English, with no obligation to go ahead."
+  },
+  {
+    "q": "How long does a build take?",
+    "a": "It depends on the job. A website on its own is quicker than an ordering or booking system. You get a timeline with the quote, and I will tell you up front what I need from you, such as photos, prices and logins, because that is usually what slows things down."
+  },
+  {
+    "q": "Do I need to be technical?",
+    "a": "No. Anything you will change yourself, like stock, prices or availability, gets a simple admin page, and I show you how to use it."
+  },
+  {
+    "q": "Can you work with what I already use?",
+    "a": "Often, yes. The Trim Company site links into the shop's existing Booksy account rather than replacing it. If something you already pay for does the job, I would rather build around it."
+  },
+  {
+    "q": "Who owns the website?",
+    "a": "We agree in writing who owns what, including the domain, the content and the code, before any work starts."
+  },
+  {
+    "q": "What happens after it goes live?",
+    "a": "I look after hosting, updates and small changes on a monthly plan, so the site does not go stale. Bigger changes are quoted separately."
+  },
+  {
+    "q": "Will an AI assistant say something wrong to my customers?",
+    "a": "It is set up on information you approve, told never to make up prices or availability, and told to send people to you when it does not know. You see it working before it goes live."
+  },
+  {
+    "q": "Do you only work in Scotland?",
+    "a": "No. I am based in Edinburgh and work remotely with businesses in any English-speaking country, by phone, video call and email."
+  },
+  {
+    "q": "Who will I be dealing with?",
+    "a": "Me, Fergus Masson. Cairn is one person, so the person you talk to is the person building it."
+  }
+]

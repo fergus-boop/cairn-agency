@@ -1,122 +1,54 @@
 import { Link } from 'react-router-dom';
-
-function CairnMark({ size = 'md' }) {
-  const wordSize = size === 'sm' ? '0.75rem' : '0.875rem';
-  return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-      <svg width="18" height="22" viewBox="0 0 20 24" fill="none" aria-hidden="true">
-        <rect x="1" y="18" width="18" height="5" rx="2" fill="#3d9e6e" />
-        <rect x="3" y="11" width="14" height="5" rx="2" fill="#3d9e6e" />
-        <rect x="5.5" y="4" width="9" height="5" rx="2" fill="#3d9e6e" />
-      </svg>
-      <span style={{ fontFamily: 'Unbounded, sans-serif', fontWeight: 700, color: '#fff', letterSpacing: '0.18em', fontSize: wordSize }}>
-        CAIRN
-      </span>
-    </div>
-  );
-}
-
-const FOOTER_LINKS = {
-  Services: [
-    { label: 'Websites', href: '#features' },
-    { label: 'AI Chatbots', href: '#features' },
-    { label: 'Live Demos', href: '#demo' },
-  ],
-  Company: [
-    { label: 'About CAIRN', href: '#why' },
-    { label: 'Contact', href: '#contact' },
-  ],
-  Legal: [
-    { label: 'Privacy Policy', href: '/privacy' },
-    { label: 'Terms of Service', href: '/terms' },
-  ],
-};
+import CairnMark from './site/CairnMark.jsx';
+import { EMAIL, LOCATION, OWNER } from '../data/site.js';
 
 export default function Footer() {
   return (
-    <footer
-      className="relative pt-20 pb-10 noise-overlay"
-      style={{
-        background:
-          'linear-gradient(180deg, var(--ca-black) 0%, var(--ca-surface) 100%)',
-        borderTop: '1px solid rgba(61,158,110,0.08)',
-      }}
-    >
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        {/* Top row */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-16 mb-16">
-          {/* Brand */}
-          <div className="max-w-xs">
-            <div className="mb-4">
-              <CairnMark size="sm" />
-            </div>
-            <p
-              className="font-body font-light text-sm leading-relaxed"
-              style={{ color: 'var(--ca-muted)' }}
-            >
-              Websites. Chatbots. Lead gen. Built for local business.
-            </p>
-          </div>
-
-          {/* Links */}
-          <div className="grid grid-cols-3 gap-12">
-            {Object.entries(FOOTER_LINKS).map(([category, links]) => (
-              <div key={category}>
-                <h4
-                  className="font-display font-bold text-xs tracking-[0.2em] uppercase mb-5"
-                  style={{ color: 'var(--ca-frost)' }}
-                >
-                  {category}
-                </h4>
-                <ul className="space-y-3">
-                  {links.map(({ label, href }) => (
-                    <li key={label}>
-                      {href.startsWith('/') ? (
-                        <Link
-                          to={href}
-                          className="font-body text-sm transition-colors hover:text-ca-accent"
-                          style={{ color: 'var(--ca-muted)' }}
-                        >
-                          {label}
-                        </Link>
-                      ) : (
-                        <a
-                          href={href}
-                          className="font-body text-sm transition-colors hover:text-ca-accent"
-                          style={{ color: 'var(--ca-muted)' }}
-                        >
-                          {label}
-                        </a>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+    <footer className="on-ink bg-ink text-paper/80">
+      <div className="wrap grid gap-12 py-16 md:grid-cols-12">
+        <div className="md:col-span-5">
+          <CairnMark tone="paper" />
+          <p className="mt-5 max-w-sm text-[0.975rem] leading-relaxed text-paper/70">
+            Websites and the systems behind them, for small owner-run businesses.
+          </p>
+          <address className="mt-6 not-italic text-[0.975rem] leading-relaxed">
+            <span className="block text-paper">Cairn, {OWNER}</span>
+            <span className="block">{LOCATION}</span>
+            <a href={`mailto:${EMAIL}`} className="mt-1 inline-block text-gold underline decoration-gold/40 underline-offset-4 hover:decoration-gold">
+              {EMAIL}
+            </a>
+          </address>
         </div>
 
-        {/* Divider */}
-        <div
-          className="h-px mb-8"
-          style={{ background: 'rgba(61,158,110,0.08)' }}
-        />
-
-        {/* Bottom row */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p
-            className="font-body text-xs"
-            style={{ color: 'var(--ca-muted)' }}
-          >
-            Built by Cairn © 2026
-          </p>
-          <p
-            className="font-display font-bold text-xs tracking-[0.15em] uppercase"
-            style={{ color: 'var(--ca-muted)', opacity: 0.5 }}
-          >
-            Built in the Cairngorms.
-          </p>
-        </div>
+        <nav aria-label="Footer" className="grid grid-cols-2 gap-8 text-[0.975rem] md:col-span-7 md:grid-cols-3">
+          <div>
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-gold">Cairn</p>
+            <ul className="space-y-2">
+              <li><Link className="hover:text-paper" to="/services">Services</Link></li>
+              <li><Link className="hover:text-paper" to="/#work">Work</Link></li>
+              <li><Link className="hover:text-paper" to="/about">About</Link></li>
+              <li><Link className="hover:text-paper" to="/faq">FAQ</Link></li>
+            </ul>
+          </div>
+          <div>
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-gold">Try it</p>
+            <ul className="space-y-2">
+              <li><Link className="hover:text-paper" to="/#gap-check">Gap check</Link></li>
+              <li><Link className="hover:text-paper" to="/#demos">Assistant demos</Link></li>
+              <li><Link className="hover:text-paper" to="/chat">Ask about Cairn</Link></li>
+            </ul>
+          </div>
+          <div>
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-gold">Legal</p>
+            <ul className="space-y-2">
+              <li><Link className="hover:text-paper" to="/privacy">Privacy</Link></li>
+              <li><Link className="hover:text-paper" to="/terms">Terms</Link></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div className="border-t border-paper/10">
+        <p className="wrap py-6 text-sm text-paper/55">© {new Date().getFullYear()} Cairn. Built in Edinburgh.</p>
       </div>
     </footer>
   );
