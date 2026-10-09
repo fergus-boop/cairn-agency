@@ -1,6 +1,6 @@
 # Round 2 handoff, 2026-10-09
 
-Status: needs_followup. Frontend source is implemented and compiles; design is not visually approved.
+Status: Codex returned needs_followup. Claude completed the follow-up the same day (see the last section), Ferg approved it and it went live as ea9234e. The "Required follow-up" list below is kept as the original handoff.
 
 ## Implemented
 - Original forest-green tokens, Unbounded + DM Sans, including legal-page CSS variables.

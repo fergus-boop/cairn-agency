@@ -19,7 +19,9 @@ to the old demos and are no longer referenced.
 | File | What | Source | Permission / credit |
 |---|---|---|---|
 | `client/public/images/loch-morlich-paul-masson.jpg` | Frozen Loch Morlich, Cairngorm hills and two stones on the ice; supplied original, 1600×1200 | Paul Masson, https://www.paulmassonphotography.co.uk; supplied by Ferg | Family permission per Ferg, 2026-10-09. Hero displays linked “Photo: Paul Masson”. |
+| `client/public/images/loch-morlich-paul-masson.webp` | WebP of the above, 1600×1200, 147 KB, served via `<source>` | Made with sharp from the original | As above |
+| `client/public/images/loch-morlich-paul-masson-1600.jpg` | mozjpeg fallback, 1600×1200, 151 KB, the hero `<img>` | Made with sharp from the original | As above |
 
-The original JPEG remains untouched. WebP and mobile variants are still required: the local encoder dependencies were unavailable, registry downloads were denied, and the system execution policy rejected the PowerShell conversion script. No nonexistent variant is referenced. Hero uses object-position 45% bottom on mobile and a dark scrim, strengthened above 1700px. Crops and sharpness have not passed browser review.
+The original JPEG (745 KB) remains untouched as the source. Codex could not encode variants in its sandbox, so Claude made the WebP and 1600 JPEG above. No mobile size: on phones the hero is portrait and the photo is scaled by height (~1133 CSS px wide), so a smaller file would be soft. Hero uses object-position 45% bottom on mobile and a dark scrim, strengthened above 1700px, plus a left scrim from 1024px. Crops checked in a browser at 375, 768, 1440 and 1920 (qa/round2).
 
 Home and About now both use the original `ferg-bike.jpg` / `ferg-ski.jpg` pair. The enduro photo is no longer displayed.
