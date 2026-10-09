@@ -3,8 +3,8 @@
 
 export const EMAIL = 'fergus@cairn.agency';
 
-// Swap for a Cal.com / Calendly link when Ferg has one. Until then calls are booked by email.
-export const BOOKING_URL = `mailto:${EMAIL}?subject=${encodeURIComponent('Free look at my business')}`;
+// Ferg's Cal.com page (added 2026-10-09). Set back to a mailto: and every CTA reverts to "Ask for a free look".
+export const BOOKING_URL = 'https://cal.com/fergus-masson-wlb5ng';
 export const BOOKING_IS_EMAIL = BOOKING_URL.startsWith('mailto:');
 
 export const OWNER = 'Fergus Masson';
