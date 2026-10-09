@@ -1,22 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* ─── Tokens ──────────────────────────────────────────────────────── */
 :root {
-  --ink: #1a1714;
-  --paper: #f2ece1;
+  color-scheme: dark;
+  --ink: #e8f0ea;
+  --paper: #060d08;
   --gold: #b89a4e;
-  --gold-deep: #74591f;
-
-  /* Legacy names still read by the legal pages; mapped onto the house palette. */
-  --ca-black: var(--paper);
-  --ca-surface: #e6ddcd;
-  --ca-text: var(--ink);
-  --ca-frost: #3d3630;
-  --ca-muted: #5f574e;
-  --ca-accent: var(--gold-deep);
-  --ca-border: rgba(26, 23, 20, 0.14);
+  --gold-deep: #3d9e6e;
+  --ca-black: #060d08;
+  --ca-surface: #0d1a10;
+  --ca-deep: #0a1209;
+  --ca-green: #2d6a4f;
+  --ca-accent: #3d9e6e;
+  --ca-heather: #7c5c8a;
+  --ca-text: #e8f0ea;
+  --ca-muted: #8aab92;
+  --ca-frost: #b8d4be;
+  --ca-border: #1a2e1e;
 }
 
 /* ─── Base ────────────────────────────────────────────────────────── */
@@ -34,7 +38,7 @@ html {
 body {
   background: var(--paper);
   color: var(--ink);
-  font-family: 'Instrument Sans', system-ui, sans-serif;
+  font-family: 'DM Sans', system-ui, sans-serif;
   font-size: 1.0625rem;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -44,7 +48,7 @@ body {
 }
 
 ::selection {
-  background: #e9dcb9;
+  background: var(--ca-green);
   color: var(--ink);
 }
 
@@ -113,19 +117,19 @@ img {
   }
 
   .label {
-    @apply font-body font-semibold uppercase text-gold-deep;
+    @apply font-body font-medium text-ink-muted;
     font-size: 0.75rem;
-    letter-spacing: 0.14em;
+    letter-spacing: 0;
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-body font-semibold transition-colors duration-200;
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-6 py-3 font-body font-semibold transition-colors duration-200;
     font-size: 0.975rem;
     min-height: 3rem;
   }
 
   .btn-primary {
-    @apply btn bg-ink text-paper hover:bg-ink-soft;
+    @apply btn bg-ca-accent text-ca-black hover:bg-ca-frost;
   }
 
   .btn-secondary {
@@ -133,7 +137,7 @@ img {
   }
 
   .btn-gold {
-    @apply btn bg-gold text-ink hover:bg-gold-pale;
+    @apply btn bg-ca-accent text-ca-black hover:bg-ca-frost;
   }
 
   .link {
@@ -168,4 +172,36 @@ img {
 }
 .chat-md strong {
   font-weight: 600;
+}
+
+
+h1, h2, h3, h4 { text-wrap: balance; }
+
+/* Loch Morlich: keep the hills and foreground stones below the copy. */
+.photo-hero { position: relative; isolation: isolate; margin-top: -4.5rem; min-height: 900px; background: #093349; }
+.hero-picture, .hero-picture img, .hero-scrim { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero-picture { z-index: -3; }
+.hero-picture img { object-fit: cover; object-position: 46% 100%; }
+.hero-scrim { z-index: -2; background: linear-gradient(180deg, rgba(6,13,8,.65) 0%, rgba(6,13,8,.48) 48%, rgba(6,13,8,.12) 70%, rgba(6,13,8,.18) 90%, rgba(6,13,8,.72) 100%); }
+.hero-copy { padding-top: 140px; padding-bottom: 320px; }
+.hero-copy h1 { max-width: 1000px; font-family: Unbounded, sans-serif; font-weight: 600; font-size: clamp(2rem, 4.5vw, 4.4rem); line-height: 1.14; letter-spacing: -.035em; }
+.hero-secondary { background: rgba(6,13,8,.25); border-color: rgba(232,240,234,.5); }
+.hero-secondary:hover { background: rgba(6,13,8,.5); }
+.hero-caption { position: absolute; bottom: 24px; left: 0; right: 0; display: flex; justify-content: space-between; gap: 12px; font-size: .8rem; color: #e8f0ea; }
+.hero-caption a { text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 639px) {
+  .photo-hero { min-height: 850px; }
+  .hero-copy { padding-top: 112px; padding-bottom: 320px; }
+  .hero-copy h1 { font-size: clamp(1.8rem, 7.8vw, 3rem); line-height: 1.2; }
+  .hero-picture img { object-position: 45% 100%; }
+  .hero-caption { bottom: 18px; font-size: .7rem; }
+}
+@media (min-width: 1700px) {
+  .photo-hero { min-height: 1040px; }
+  .hero-copy { padding-top: 164px; }
+  .hero-scrim { background: linear-gradient(180deg, rgba(6,13,8,.66), rgba(6,13,8,.5) 45%, rgba(6,13,8,.23) 72%, rgba(6,13,8,.3) 90%, rgba(6,13,8,.75)); }
+}
+/* Darker on the text side so the intro and buttons stay readable over the snow line. */
+@media (min-width: 1024px) {
+  .hero-scrim::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(6,13,8,.42) 0%, rgba(6,13,8,.28) 38%, rgba(6,13,8,0) 62%); }
 }

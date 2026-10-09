@@ -1,20 +1,22 @@
 /** @type {import('tailwindcss').Config} */
-// Cairn house palette: ink #1a1714 / gold #b89a4e / paper #f2ece1.
-// gold-deep is the text-safe gold on paper (about 5:1); plain gold is for marks, rules and text on ink.
+// Owner-restored Cairn palette. Ink/paper aliases keep existing page composition consistent.
 export default {
   content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
       colors: {
-        ink: { DEFAULT: '#1a1714', soft: '#3d3630', muted: '#5f574e' },
-        paper: { DEFAULT: '#f2ece1', bright: '#f8f4ec' },
-        stone: { DEFAULT: '#e6ddcd', deep: '#d6c9b3' },
-        gold: { DEFAULT: '#b89a4e', deep: '#74591f', pale: '#e9dcb9' },
-        line: 'rgba(26, 23, 20, 0.14)',
+        ink: { DEFAULT: '#e8f0ea', soft: '#b8d4be', muted: '#8aab92' },
+        paper: { DEFAULT: '#060d08', bright: '#0d1a10' },
+        stone: { DEFAULT: '#0d1a10', deep: '#1a2e1e' },
+        gold: { DEFAULT: '#b89a4e', deep: '#3d9e6e', pale: '#d2bc83' },
+        line: '#1a2e1e',
+        'ca-black': '#060d08', 'ca-surface': '#0d1a10', 'ca-deep': '#0a1209',
+        'ca-green': '#2d6a4f', 'ca-accent': '#3d9e6e', 'ca-heather': '#7c5c8a',
+        'ca-text': '#e8f0ea', 'ca-muted': '#8aab92', 'ca-frost': '#b8d4be', 'ca-border': '#1a2e1e',
       },
       fontFamily: {
         display: ['Unbounded', 'system-ui', 'sans-serif'],
-        body: ['"Instrument Sans"', 'system-ui', 'sans-serif'],
+        body: ['"DM Sans"', 'system-ui', 'sans-serif'],
       },
       maxWidth: {
         site: '76rem',

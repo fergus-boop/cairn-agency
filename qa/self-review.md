@@ -55,3 +55,14 @@ Codex-owns-design rule and is recorded as such.
 
 ## Ready to show Ferg?
 Yes, as a preview. It is not deployed and should go live only after he has looked at it.
+
+
+## Round 2, 2026-10-09: owner feedback
+
+This round restores Ferg's original forest-green identity and uses his father's Loch Morlich photograph. The copy now says directly what Cairn builds; unnamed project cards and the Why Cairn explanation are removed. Home and About share the original ski/bike pair, verbatim biography and credentials. The biography's original em dash is intentionally preserved to satisfy the verbatim instruction. The gap check accepts free text as well as ticks.
+
+Source photograph and old live screenshot inspected. **No new desktop/mobile screenshots were captured or inspected:** browser policy denied access to the local preview and explicitly prohibited alternate routes. Responsive crops, heading wraps, photographic contrast and 1920px image sharpness remain unverified. No claim of visual approval.
+
+Final source compiles through Vite's API with the existing config imported directly; standard npm run build still fails during config bundling because of environment permissions. GapCheck source-state cases passed inspection (ticks, text, both, whitespace, Unicode/newlines, Clear). Dark-palette body contrast is 16.92:1; muted panel text 7.10:1. Protected files and backend remain unchanged.
+
+**Not ready for design sign-off.** Optimised WebP/JPEG/mobile variants remain to be made, along with the full requested screenshot and browser interaction review. See `round2/README.md`, `round2/build-api.log` and `round2/gap-check-results.json` for evidence and precise blockers. The Cal.com booking link remains active; previous round's “no booking link” limitation is obsolete. No commit, deployment or brain edits.

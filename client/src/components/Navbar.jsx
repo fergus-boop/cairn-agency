@@ -35,14 +35,14 @@ export default function Navbar() {
   }, [open]);
 
   const linkClass = ({ isActive }) =>
-    `rounded-full px-3.5 py-2 text-[0.95rem] font-medium transition-colors ${
+    `rounded-md px-3.5 py-2 text-[0.95rem] font-medium transition-colors ${
       isActive ? 'text-ink' : 'text-ink-soft hover:text-ink'
     }`;
 
   return (
     <header
       className={`sticky top-0 z-40 transition-colors duration-200 ${
-        scrolled || open ? 'border-b border-line bg-paper/95 backdrop-blur' : 'border-b border-transparent bg-paper'
+        scrolled || open ? 'border-b border-line bg-paper/95 backdrop-blur' : location.pathname === '/' ? 'border-b border-transparent bg-transparent' : 'border-b border-transparent bg-paper'
       }`}
     >
       <a
@@ -59,7 +59,7 @@ export default function Navbar() {
         <nav aria-label="Main" className="hidden items-center gap-1 md:flex">
           {LINKS.map((l) =>
             l.to.includes('#') ? (
-              <Link key={l.to} to={l.to} className="rounded-full px-3.5 py-2 text-[0.95rem] font-medium text-ink-soft transition-colors hover:text-ink">
+              <Link key={l.to} to={l.to} className="rounded-md px-3.5 py-2 text-[0.95rem] font-medium text-ink-soft transition-colors hover:text-ink">
                 {l.label}
               </Link>
             ) : (
@@ -76,7 +76,7 @@ export default function Navbar() {
           </a>
           <button
             type="button"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full text-ink hover:bg-ink/5 md:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-md text-ink hover:bg-ink/5 md:hidden"
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? 'Close menu' : 'Open menu'}

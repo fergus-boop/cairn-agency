@@ -26,3 +26,15 @@ Taking: avoidance. This site is type-and-illustration led on a paper ground (no 
 - Working tool: the gap check. Visitors tick what happens in their business, see the matching fixes, and can email the list straight to Ferg.
 - Rhythm: paper / stone bands, one ink band for the live demos, thin ink rules between rows. Density low, motion moderate (reveal-on-scroll, the capstone settle), all of it off under prefers-reduced-motion.
 - Voice: first person ("I"), because Cairn is one person.
+
+
+## Round 2: owner-directed restoration, 2026-10-09
+Source: `qa/live-home-1440-full.png`, `client/src/demos-archive/Hero.jsx`, `client/src/demos-archive/AboutFerg.jsx`, and pre-redesign tokens at git `6f9feec`.
+Taking: the original forest-green palette, Unbounded + DM Sans, large landscape hero and the personal ski/bike crossfade. Keep the new service details and named Trim Company proof. Replace generic slogans with plain headings and remove unnamed project cards. This supersedes the round-1 palette and illustration direction above.
+
+Source: `client/public/images/loch-morlich-paul-masson.jpg`, supplied by Ferg; Paul Masson, https://www.paulmassonphotography.co.uk.
+Taking: the real family photograph of frozen Loch Morlich. Inspected the 1600×1200 source: clear blue sky above the hills; two stones near the lower centre. Place copy in the sky and preserve both stones with a lower-centred mobile crop. Use optimised WebP/JPEG variants, a restrained dark scrim for readable type, and visible photographer credit.
+
+Direction: dark green grounds with frost body text, green actions, restrained heather details and gold retained for Trim Company. Fewer repeated labels, squared controls, balanced sentence-case headings. Share the restored personal biography and credentials between home and About; honour reduced motion in the crossfade.
+
+Round-2 implementation status: the original JPEG is wired with responsive positioning and a scrim. Optimised variants and rendered screenshot review could not be completed due to tooling and browser policy restrictions; see `qa/round2/README.md`. The references above describe the intended direction, not a passed visual review.

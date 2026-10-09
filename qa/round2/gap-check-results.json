@@ -1,0 +1,40 @@
+[
+  {
+    "case": "empty",
+    "email": null
+  },
+  {
+    "case": "whitespace only",
+    "email": null
+  },
+  {
+    "case": "text only, Unicode and newline",
+    "email": {
+      "recipient": "fergus@cairn.agency",
+      "subject": "Free look: my business",
+      "body": "Hi Ferg,\n\nIn my own words:\nMy booking form drops café orders & dates.\nPlease check it.\n\n\nBusiness name:\nWebsite or social page (if any):\n\nThanks"
+    }
+  },
+  {
+    "case": "ticks plus text",
+    "email": {
+      "recipient": "fergus@cairn.agency",
+      "subject": "Free look: my business",
+      "body": "Hi Ferg,\n\nThese sound like my business:\n- I miss calls while I'm working\n\nIn my own words:\nMy booking form drops café orders & dates.\nPlease check it.\n\n\nBusiness name:\nWebsite or social page (if any):\n\nThanks"
+    }
+  },
+  {
+    "case": "ticks only",
+    "email": {
+      "recipient": "fergus@cairn.agency",
+      "subject": "Free look: my business",
+      "body": "Hi Ferg,\n\nThese sound like my business:\n- I miss calls while I'm working\n\n\nBusiness name:\nWebsite or social page (if any):\n\nThanks"
+    }
+  },
+  {
+    "case": "clear both",
+    "email": null,
+    "text": "",
+    "checked": false
+  }
+]

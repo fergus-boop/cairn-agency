@@ -147,28 +147,6 @@ export const TRIM = {
   testimonial: null, // { quote: '...', name: '...', role: '...' }
 };
 
-// Unnamed by request: describe the work, never name or show the business.
-export const CASE_STUDIES = [
-  {
-    kind: 'Client project',
-    title: 'Watch dealer',
-    text: 'Website and a stock panel the owner runs: add a piece, upload photos, mark it sold. Nothing waits on me.',
-    icon: 'watch',
-  },
-  {
-    kind: 'Pilot build',
-    title: 'Family sawmill',
-    text: 'Website and a four-step ordering system. Customers build a cut list, choose delivery or collection and get an order reference, so the whole order arrives in one place.',
-    icon: 'trees',
-  },
-  {
-    kind: 'Demo',
-    title: 'Holiday-let property manager',
-    text: "A booking journey that stays on the manager's own site, instead of sending guests off to a third-party checkout.",
-    icon: 'home',
-  },
-];
-
 export const DEMOS = [
   {
     context: 'demo-ski-school',
@@ -187,3 +165,38 @@ export const DEMOS = [
     prompts: ['Easy family ride, half a day', 'Something technical for experienced riders', 'A scenic loop past a loch', 'Which bike should I hire?'],
   },
 ];
+
+export const HERO = {
+  headline: 'Websites, bookings and online shops for small businesses.',
+  intro: "I'm Ferg. I build websites and the systems behind them, from online ordering to direct booking for holiday lets and replies to missed enquiries.",
+  location: 'From Aviemore. Based in Edinburgh.',
+  credit: 'Photo: Paul Masson',
+  creditUrl: 'https://www.paulmassonphotography.co.uk',
+};
+
+export const ABOUT = {
+  title: 'Built local. Built different.',
+  intro: "I'm Fergus Masson. Most people call me Ferg.",
+  description: 'Local to the mountains we all love, ski instructor, mountain biker, mechanical engineer, with years spent in and around the businesses Cairn builds for. I know exactly where the gaps are, and I strive to deliver the best possible outcome for every client.',
+  credentials: [
+    ['Ski Lover & Instructor', 'Free-Ski Aviemore'],
+    ['Mountain Biker', 'Highlands & Beyond'],
+    ['Born & Raised', 'Aviemore'],
+    ['Mechanical Engineer', 'Heriot-Watt University'],
+    ['All-Round Go-Getter', 'Driven to deliver'],
+  ],
+};
+
+export const PAGE_COPY = {
+  gapTitle: 'Where are customers slipping through?',
+  gapIntro: "Tick what sounds familiar, describe it in your own words, or do both. You can email it straight to me.",
+  gapLabel: 'Something else? Describe it in your own words',
+  gapTextOnly: "Tell me what is happening and I'll take a look. You can add any of the tick boxes too.",
+  gapEmail: 'Email this to Ferg',
+  offersTitle: 'What I build',
+  stepsTitle: 'How it works',
+  demosTitle: 'Try the assistants',
+  servicesIntro: "Websites, direct booking and automated replies. Every job starts with a free look at what you've got now, so the quote covers what you actually need.",
+  contactTitle: "Tell me what's not working.",
+  contactIntro: 'A couple of lines about your business is plenty. I read and answer every email myself, and the first look costs nothing.',
+};
