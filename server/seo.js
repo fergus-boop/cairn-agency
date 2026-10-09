@@ -9,8 +9,8 @@ const here = dirname(fileURLToPath(import.meta.url));
 const description =
   'Cairn builds websites and the systems behind them for small, owner-run businesses: online ordering and bookings, admin pages owners run themselves, direct booking for holiday lets, and automatic replies to missed calls and enquiries.';
 
-// No street address or phone on purpose: Cairn is home-based and remote. Add sameAs (Google Business
-// Profile URL) once Ferg supplies it.
+// No street address or phone on purpose: Cairn is home-based and remote (service-area profile).
+// sameAs: the Google Business Profile by its Maps CID, decoded from the knowledge-panel link Ferg sent 2026-10-09.
 export const business = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
@@ -23,6 +23,7 @@ export const business = {
   logo: origin + '/favicon.svg',
   address: { '@type': 'PostalAddress', addressLocality: 'Edinburgh', addressCountry: 'GB' },
   founder: { '@type': 'Person', name: 'Fergus Masson', jobTitle: 'Founder' },
+  sameAs: ['https://maps.google.com/?cid=16021504094648978737'],
   knowsLanguage: 'en',
   makesOffer: [
     'Websites and the systems behind them',
